@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import { fetchCoinHistory, fetchCoinTickers } from "../api";
 import { useOutletContext } from "react-router-dom";
 import ApexCharts from "react-apexcharts";
-import Price from "./Price";
 
 interface ChartProps {
     coinId:string;
