@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import Router from './Router';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // 스타일 컴포넌트는 고립되어 있어.
 // GlobalStyle은 한 컴포넌트를 만들 수 있게 해주는데 
@@ -73,6 +74,7 @@ function App() {
     <>
       <GlobalStyle/> 
       <Router/>
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }

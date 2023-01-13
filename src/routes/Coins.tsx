@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { fetchCoins } from '../api';
+import { Helmet } from 'react-helmet';
 
 const Title = styled.h1`
     font-size: 40px;
@@ -52,7 +55,7 @@ const Loader = styled.span`
 `;
 
 
-interface CoinInterface {
+interface ICoin {
     id: string,
     name: string,
     symbol: string,
@@ -60,10 +63,10 @@ interface CoinInterface {
     is_new: boolean,
     is_active: boolean,
     type: string,
-}
+} 
 
 function Coins() {
-    const [coins, setCoins] = useState<CoinInterface[]>([]);
+    /*const [coins, setCoins] = useState<ICoin[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         (async () => {
@@ -73,15 +76,19 @@ function Coins() {
             setLoading(false);
         })();
     }, []);
-    console.log(coins);
+    console.log(coins);*/
+    const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
     return (
     <Container>
+        <Helmet>
+            <title>Major Crytocurrencies</title>
+        </Helmet>
         <Header>
-            <Title>Coin</Title>
+            <Title>Major Crytocurrencies</Title>
         </Header>
-        {loading ? <Loader>Loading...</Loader> : (
+        {isLoading ? <Loader>Loading...</Loader> : (
         <CoinsList>
-            {coins.map((coin) => 
+            {data?.slice(0,100).map((coin) => 
                 <Coin key={coin.id}>
                     <Link to={`/${coin.id}`} state={coin}>
                         <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}/>

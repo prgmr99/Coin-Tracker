@@ -21,9 +21,9 @@ const Container = styled.div<CircleProps>`
 
 function Circle( {bgColor, borderColor, text = "default text"}:CircleProps ) {
     const [counter, setCounter] = useState(1);
-    return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor }>
+    return (<Container bgColor={bgColor} borderColor={borderColor ?? bgColor }>
         {text}
-        </Container>
+        </Container>);
 }
 
 export default Circle;
