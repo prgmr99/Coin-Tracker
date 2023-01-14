@@ -1,6 +1,10 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider  } from 'styled-components';
 import Router from './Router';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { darkTheme, lightTheme } from './theme';
+import { useState, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from './atoms';
 
 // 스타일 컴포넌트는 고립되어 있어.
 // GlobalStyle은 한 컴포넌트를 만들 수 있게 해주는데 
@@ -70,11 +74,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
-      <GlobalStyle/> 
-      <Router/>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle/> 
+          <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }

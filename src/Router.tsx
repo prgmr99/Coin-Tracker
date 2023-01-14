@@ -5,11 +5,15 @@ import Chart from './routes/Chart';
 import Price from './routes/Price';
 import Candle from './routes/Candle';
 
+interface IRouterProps {
+    
+}
+
 interface ChartProps {
     coinId:string;
 }
 
-function Router() {
+function Router({}:IRouterProps) {
     return (
         <BrowserRouter>
             <Routes>
@@ -19,7 +23,7 @@ function Router() {
                     </Route>
                     <Route path="price" element={<Price />}/>    
                 </Route>
-                <Route path="/" element={<Coins />}/>
+                <Route path="/" element={<Coins />} />
             </Routes>
         </BrowserRouter>
     );

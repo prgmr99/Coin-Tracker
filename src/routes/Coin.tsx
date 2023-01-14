@@ -3,8 +3,11 @@ import { Link, useParams, useLocation, Outlet, useMatch, useNavigate } from 'rea
 import { useQuery } from 'react-query';
 import { fetchCoinTickers } from '../api';
 import { fetchCoinInfo } from '../api';
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 
+interface ICoinProp {
+    
+}
 
 interface IRouteState {
     name: string;
@@ -137,7 +140,7 @@ const BackBtn = styled.button`
     align-items: left;
 `;
 
-function Coin() {
+function Coin({}:ICoinProp) {
     const {coinId} = useParams();
     const location = useLocation();
     const state = location.state as IRouteState;
@@ -192,7 +195,7 @@ function Coin() {
                     </OverviewItem>
                     <OverviewItem>
                       <span>Price:</span>
-                      <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
+                      <span>{tickersData?.quotes?.USD?.price?.toFixed(3)}</span>
                     </OverviewItem>
                   </Overview>
                   <Description>{infoData?.description}</Description>

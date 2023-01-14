@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { fetchCoins } from '../api';
 import { Helmet } from 'react-helmet';
+import { useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../atoms';
+
+interface ICoinsProp {
+    
+}
 
 const Title = styled.h1`
     font-size: 40px;
@@ -33,10 +39,11 @@ const CoinsList = styled.ul`
 `;
 
 const Coin = styled.li`
-    background-color: white;
-    color: ${props => props.theme.bgColor};
+    background-color: ${props => props.theme.cartBgColor};
+    color: ${props => props.theme.textColor};
     margin-bottom: 10px;
     border-radius: 15px;
+    border: 1px solid white;
     a {
         padding: 20px;
         transition: color 0.2s ease-in;
@@ -65,7 +72,7 @@ interface ICoin {
     type: string,
 } 
 
-function Coins() {
+function Coins({}:ICoinsProp) {
     /*const [coins, setCoins] = useState<ICoin[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -78,13 +85,16 @@ function Coins() {
     }, []);
     console.log(coins);*/
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
+    const setDarkAtom = useSetRecoilState(isDarkAtom);
+    const toggleDarkAtom = () => setDarkAtom(prev => !prev);
     return (
     <Container>
         <Helmet>
-            <title>Major Crytocurrencies</title>
+            <title>Crytocurrencies</title>
         </Helmet>
         <Header>
-            <Title>Major Crytocurrencies</Title>
+            <Title>Crytocurrencies</Title>
+            <button onClick={toggleDarkAtom}>Toggle Mode</button>
         </Header>
         {isLoading ? <Loader>Loading...</Loader> : (
         <CoinsList>

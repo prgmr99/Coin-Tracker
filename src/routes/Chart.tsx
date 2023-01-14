@@ -1,7 +1,9 @@
 import { useQuery } from "react-query";
-import { fetchCoinHistory, fetchCoinTickers } from "../api";
+import { fetchCoinHistory, } from "../api";
 import { useOutletContext } from "react-router-dom";
 import ApexCharts from "react-apexcharts";
+import { isDarkAtom } from "../atoms";
+import { useRecoilValue } from "recoil";
 
 interface ChartProps {
     coinId:string;
@@ -19,6 +21,7 @@ interface IHistorical {
 
 function Chart() {
     const {coinId} = useOutletContext<ChartProps>();
+    const isDark = useRecoilValue(isDarkAtom);
     const { isLoading:isHistoryLoading, data:HistoryData } = useQuery<IHistorical[]>(
         ["ohlcv", coinId], 
         () => fetchCoinHistory(coinId),
@@ -26,6 +29,8 @@ function Chart() {
             //refetchInterval: 10000,
         }
     );
+    console.log(coinId);
+    console.log(isDark);
     return <div>{isHistoryLoading ? "Loading chart..." : 
     <div>
     <ApexCharts 
@@ -38,7 +43,7 @@ function Chart() {
         ]}
         options={{
             theme:{
-                mode: "dark",
+                mode: isDark ? "dark" : "light",
             },
             chart:{
                 height: 500,
@@ -65,7 +70,7 @@ function Chart() {
                 axisTicks: { show: false },
                 labels: { show: false },
                 type: "datetime",
-                categories: HistoryData?.map((price) => new Date(price.time_close*1000).toUTCString()),
+                categories: HistoryData?.map((price) => new Date(price.time_close * 1000).toUTCString()),
             },
             fill: {
                 type: "gradient",
@@ -90,7 +95,7 @@ function Chart() {
             ]}
             options= {{
                 theme:{
-                    mode: "dark",
+                    mode: isDark ? "dark" : "light",
                 },
                 chart: {
                     type: 'candlestick',
@@ -98,6 +103,7 @@ function Chart() {
                     toolbar: {
                         show: false,
                     },
+                    background: "transparent",
                 },
                 grid: { show: false },
                 title: {
