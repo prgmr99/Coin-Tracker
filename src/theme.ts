@@ -5,11 +5,13 @@ export const darkTheme: DefaultTheme = {
     textColor: "white",
     accentColor: "#00a8ff",
     cartBgColor: "transparent",
+    selectCard: "#ffeaa7",   
 }
 
 export const lightTheme: DefaultTheme = {
-    bgColor: "whitesmoke",
+    bgColor: "#f5f6fa",
     textColor: "black",
     accentColor: "#00a8ff",
-    cartBgColor: "white",
+    cartBgColor: "transparent",
+    selectCard: "#55efc4",
 }

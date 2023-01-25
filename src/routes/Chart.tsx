@@ -1,9 +1,10 @@
 import { useQuery } from "react-query";
 import { fetchCoinHistory, } from "../api";
 import { useOutletContext } from "react-router-dom";
-import ApexCharts from "react-apexcharts";
 import { isDarkAtom } from "../atoms";
 import { useRecoilValue } from "recoil";
+import ApexCharts from "react-apexcharts";
+import styled from "styled-components";
 
 interface ChartProps {
     coinId:string;
@@ -18,6 +19,11 @@ interface IHistorical {
     volume: string;
     market_cap: number;
 }
+const Hr = styled.hr`
+    background-color: ${props => props.theme.accentColor};
+    height: 1px;
+    border: 0;
+`;
 
 function Chart() {
     const {coinId} = useOutletContext<ChartProps>();
@@ -83,6 +89,7 @@ function Chart() {
                 },
             },
         }}/>
+        <Hr/>
         <ApexCharts 
             type="candlestick"
             series={[

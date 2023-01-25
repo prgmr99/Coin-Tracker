@@ -42,16 +42,15 @@ interface IPriceData {
     };
 }
 const PriceContainer = styled.div`
-    padding: 0px 20px;
+    padding: 0px 0px;
     max-width: 480px;
     margin: 0 auto;
 `;
 const PriceList = styled.ul`
-    
 `;
 const PriceInfo = styled.li`
-    background-color: white;
-    color: ${props => props.theme.bgColor};
+    background-color: ${props => props.theme.cartBgColor};
+    color: ${props => props.theme.textColor};
     margin-bottom: 10px;
     border-radius: 15px;
     padding: 20px;
@@ -59,13 +58,14 @@ const PriceInfo = styled.li`
     font-size: 18px;
     font-weight: 500;
     align-items: center;
+    border: 1px solid ${props => props.theme.accentColor};
 `;
 const PriceName = styled.span`
     font-size: 18px;
     font-weight: 500;
 `;
 const Prices = styled.span`
-    color:#192a56;
+    color: ${props => props.theme.accentColor};
 `;
 const AbovePrice = styled.span`
     color: #4cd137;
@@ -98,10 +98,10 @@ function Price() {
                         <Prices>
                             : {((data?.quotes.USD.percent_change_1h !== undefined) && (data?.quotes.USD.percent_change_1h >= 0)) ? 
                             <AbovePrice>
-                                {data?.quotes.USD.percent_change_1h}%
+                                {data?.quotes.USD.percent_change_1h}% ⬆︎
                             </AbovePrice> : 
                             <BelowPrice>
-                                {data?.quotes.USD.percent_change_1h}%
+                                {data?.quotes.USD.percent_change_1h}% ⬇︎
                             </BelowPrice>}
                         </Prices>
                     </PriceInfo>
@@ -112,10 +112,10 @@ function Price() {
                         <Prices>
                             : {((data?.quotes.USD.percent_change_30m !== undefined) && (data?.quotes.USD.percent_change_30m >= 0)) ? 
                             <AbovePrice>
-                                {data?.quotes.USD.percent_change_30m}%
+                                {data?.quotes.USD.percent_change_30m}% ⬆︎
                             </AbovePrice> : 
                             <BelowPrice>
-                                {data?.quotes.USD.percent_change_30m}%
+                                {data?.quotes.USD.percent_change_30m}% ⬇︎
                             </BelowPrice>}
                         </Prices>
                     </PriceInfo>
@@ -126,10 +126,10 @@ function Price() {
                         <Prices>
                             : {((data?.quotes.USD.percent_change_15m !== undefined) && (data?.quotes.USD.percent_change_15m >= 0)) ? 
                             <AbovePrice>
-                                {data?.quotes.USD.percent_change_15m}%
+                                {data?.quotes.USD.percent_change_15m}% ⬆︎
                             </AbovePrice> : 
                             <BelowPrice>
-                                {data?.quotes.USD.percent_change_15m}%
+                                {data?.quotes.USD.percent_change_15m}% ⬇︎
                             </BelowPrice>}
                         </Prices>
                     </PriceInfo>
@@ -140,10 +140,10 @@ function Price() {
                         <Prices>
                             : {((data?.quotes.USD.volume_24h_change_24h !== undefined) && (data?.quotes.USD.volume_24h_change_24h >= 0)) ? 
                             <AbovePrice>
-                                {data?.quotes.USD.volume_24h_change_24h}
+                                {data?.quotes.USD.volume_24h_change_24h} ⬆︎
                             </AbovePrice> : 
                             <BelowPrice>
-                                {data?.quotes.USD.volume_24h_change_24h}
+                                {data?.quotes.USD.volume_24h_change_24h} ⬇︎
                             </BelowPrice>}
                         </Prices>
                     </PriceInfo>

@@ -3,7 +3,6 @@ import Coins from './routes/Coins';
 import Coin from './routes/Coin';
 import Chart from './routes/Chart';
 import Price from './routes/Price';
-import Candle from './routes/Candle';
 
 interface IRouterProps {
     
@@ -18,9 +17,7 @@ function Router({}:IRouterProps) {
         <BrowserRouter>
             <Routes>
                 <Route path="/:coinId/" element={<Coin />}>
-                    <Route path="chart" element={<Chart />}>
-                        <Route path="candle" element={<Candle />}/>
-                    </Route>
+                    <Route path="chart" element={<Chart />}/>
                     <Route path="price" element={<Price />}/>    
                 </Route>
                 <Route path="/" element={<Coins />} />

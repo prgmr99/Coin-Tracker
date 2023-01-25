@@ -5,9 +5,6 @@ import { fetchCoinTickers } from '../api';
 import { fetchCoinInfo } from '../api';
 import { Helmet } from "react-helmet";
 
-interface ICoinProp {
-    
-}
 
 interface IRouteState {
     name: string;
@@ -80,21 +77,28 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   padding: 7px 0px;
   border-radius: 10px;
+  border: 1px solid ${props => props.theme.accentColor};
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
   a {
     display: block;
   }
+  &:hover{
+        background-color: ${props => props.theme.accentColor};
+        color: ${props => props.theme.bgColor};
+        transition: background-color 0.4s ease-in;
+  }
 `;
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   padding: 10px 20px;
   border-radius: 10px;
+  border: 1px solid ${props => props.theme.accentColor};
 `;
 const OverviewItem = styled.div`
   display: flex;
@@ -109,19 +113,19 @@ const OverviewItem = styled.div`
 `;
 const Description = styled.p`
   margin: 20px 0px;
+  border: 1px solid ${props => props.theme.accentColor};
+  border-radius: 15px;
+  padding: 12px 10px;
 `;
-
 const Title = styled.h1`
     font-size: 40px;
     color: ${props => props.theme.accentColor};
 `;
-
 const Container = styled.div`
     padding: 0px 20px;
     max-width: 480px;
     margin: 0 auto;
 `;
-
 const Header = styled.header`
     height: 10vh;
     display: flex;
@@ -138,9 +142,19 @@ const BackBtn = styled.button`
     top: 15px;
     justify-content: left;
     align-items: left;
+    border-radius: 5px;
+    border: 0.5px solid ${props => props.theme.textColor};
+    background-color: ${props => props.theme.cartBgColor};
+    color: ${props => props.theme.textColor};
+    &:hover{
+        background-color: ${props => props.theme.accentColor};
+        color: ${props => props.theme.bgColor};
+        transition: background-color 0.4s ease-in;
+    }
 `;
 
-function Coin({}:ICoinProp) {
+
+function Coin() {
     const {coinId} = useParams();
     const location = useLocation();
     const state = location.state as IRouteState;
@@ -176,7 +190,7 @@ function Coin({}:ICoinProp) {
         <Helmet>
             <title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</title>
         </Helmet>
-        <BackBtn onClick={clickBackBtn}>button</BackBtn>
+        <BackBtn onClick={clickBackBtn}>Back</BackBtn>
         <Header>
             <Title>
             {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
