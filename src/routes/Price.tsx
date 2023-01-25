@@ -88,7 +88,7 @@ function Price() {
                             Price
                         </PriceName>
                         <Prices>
-                            : {data?.quotes.USD.price.toFixed(3)} 
+                            : ${data?.quotes.USD.price.toFixed(3)} 
                         </Prices>
                     </PriceInfo>
                     <PriceInfo>
