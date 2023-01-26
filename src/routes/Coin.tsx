@@ -116,6 +116,15 @@ const Description = styled.p`
   border: 1px solid ${props => props.theme.accentColor};
   border-radius: 15px;
   padding: 12px 10px;
+  span:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
 `;
 const Title = styled.h1`
     font-size: 40px;
@@ -205,14 +214,17 @@ function Coin() {
                     </OverviewItem>
                     <OverviewItem>
                       <span>Symbol:</span>
-                      <span>${infoData?.symbol}</span>
+                      <span>{infoData?.symbol}</span>
                     </OverviewItem>
                     <OverviewItem>
                       <span>Price:</span>
-                      <span>{tickersData?.quotes?.USD?.price?.toFixed(3)}</span>
+                      <span>${tickersData?.quotes?.USD?.price?.toFixed(3)}</span>
                     </OverviewItem>
                   </Overview>
-                  <Description>{infoData?.description}</Description>
+                  <Description>
+                    <span>Description:</span>
+                    {infoData?.description}
+                  </Description>
                   <Overview>
                     <OverviewItem>
                       <span>Total Suply:</span>
